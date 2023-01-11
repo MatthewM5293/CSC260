@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.FN))
+{
+    <h2>Name: @ViewBag.FN</h2>
+}
+else
+{
+    <div class="makered">
+        <h4>Aren't you forgetting something like First Name?</h4>
+    </div>
+}
