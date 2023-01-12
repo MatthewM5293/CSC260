@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Mad Lib";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.adj1) || !string.IsNullOrEmpty(ViewBag.verb1) || !string.IsNullOrEmpty(ViewBag.verb2) || !string.IsNullOrEmpty(ViewBag.adv1) || !string.IsNullOrEmpty(ViewBag.adj2) || !string.IsNullOrEmpty(ViewBag.verb3) || !string.IsNullOrEmpty(ViewBag.adv2))
+{
+    <p>
+        The curious cat sprinted down the hallway, her tail held high and twitching with excitement.
+        As she reached the end of the corridor, she came upon a door that was slightly ajar.
+        Without hesitation, she squeezed through the narrow opening and found herself in a large, <u>@ViewBag.adj1</u> room.
+        The room was dimly lit and filled with all sorts of strange and interesting objects.
+        The cat cautiously <u>@ViewBag.verb1</u> her way through the cluttered space, her eyes wide with wonder.
+        Suddenly, she heard a soft <u>@ViewBag.verb2</u> coming from the corner of the room.
+        She crept <u>@ViewBag.adv1</u> towards the sound, her heart pounding with anticipation.
+        As she peered around the corner, she was greeted by a large, <u>@ViewBag.adj2</u> mouse who was busily <u>@ViewBag.verb3</u> on a piece of cheese.
+        The cat let out a <u>@ViewBag.adv2</u> hiss and the mouse scampered off into the shadows, leaving the cat to enjoy her well-deserved snack.
+
+        <form asp-controller="Home" asp-action="Index" method="post">
+            <button type="submit">Go back</button>
+        </form>
+    </p>
+}
+else
+{
+        <div class="makered">
+            <h4>You must fill in all fields!</h4>
+             <form asp-controller="Home" asp-action="Index" method="post" >
+            <button type="submit">Go back</button>
+             </form>
+        </div>
+}
+
+

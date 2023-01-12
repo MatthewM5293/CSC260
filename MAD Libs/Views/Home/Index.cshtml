@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to my MAD LIB!</h1>
+    <br />
+</div>
+
+<div class="text-center">
+    <div class="col-12">
+        <form asp-controller="Home" asp-action="Privacy" method="post" >
+            <label for="adj1">Adjective: </label>
+            <input id="adj1" type="text" name="adj1" placeholder="Adjective" />
+            <br/>
+            <br/>
+            <br/>
+            <label for="verb1">Verb: </label>
+            <input id="verb1" type="text" name="verb1" placeholder="Verb" />
+            <br />
+            <br />
+            <br />
+            <label for="verb2">Verb: </label>
+            <input id="verb2" type="text" name="verb2" placeholder="Verb" />
+            <br />
+            <br />
+            <br />
+            <label for="adverb1">Adverb: </label>
+            <input id="adverb1" type="text" name="adverb1" placeholder="Adverb" />
+            <br />
+            <br />
+            <br />
+            <label for="adj2">Adjective: </label>
+            <input id="adj2" type="text" name="adj2" placeholder="Adjective" />
+            <br/>
+            <br/>
+            <br/>
+            <label for="verb3">Verb: </label>
+            <input id="verb3" type="text" name="verb3" placeholder="Verb" />
+            <br />
+            <br />
+            <br />
+            <label for="adverb2">Adverb: </label>
+            <input id="adverb2" type="text" name="adverb2" placeholder="Adverb" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <button type="submit">Submit</button>
+            <br />
+        </form>
+    </div>
+</div>
