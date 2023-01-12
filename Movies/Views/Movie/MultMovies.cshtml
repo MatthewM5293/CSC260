@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Movie>
+
+@if (Model == null)
+{
+    <h2>No Movies Provided</h2>
+} 
+else
+{
+    foreach (Movie movie in Model)
+    {
+        <h3>@movie.ToString()</h3>
+    }
+}
