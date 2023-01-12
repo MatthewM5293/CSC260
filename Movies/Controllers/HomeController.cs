@@ -17,10 +17,12 @@ namespace Movies.Controllers
         public IActionResult Index()
         {
             return View();
+            //return Redirect("https://lms.neumont.edu/courses/3404485/assignments/34816051");
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy(string pizza)
         {
+            ViewBag.mypizza = pizza;
             return View();
         }
 
