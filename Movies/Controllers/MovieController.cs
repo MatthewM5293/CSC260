@@ -5,6 +5,7 @@ namespace Movies.Controllers
 {
     public class MovieController : Controller
     {
+        //hardcoded movie list
         private static List<Movie> Movelist = new List<Movie>
         {
             new Movie("Star Wars: A New Hope", 1977, 4f),
