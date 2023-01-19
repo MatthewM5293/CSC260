@@ -7,5 +7,27 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <button class= "btn btn-primary"><i class="bi bi-controller"> Game</i></button>
     <a asp-controller="Home" asp-action="Privacy" asp-fragment="bob" asp-route-pizza="lol">Privacy</a>
+    <br />
+    <a asp-controller="Home" asp-action="ParamTest">Param Test Simple</a>
+    <br />
+    
+    @*Route method*@
+    <a asp-controller="Home" asp-action="ParamTest" asp-route-id="66">Param Route</a> @*route method*@
+
+    @*Query method*@
+    <a href="/Home/ParamTest?id=66">Query Param</a>
+
+    @*Post method*@
+    <form asp-controller="Home" asp-action="ParamTest" method="post"> 
+        Enter a number: <input name="id" /> @*looks for "OBJECT" with name of id*@
+        <button type="submit">Submit</button>
+    </form>
+
+    @*The abomination example*@
+    <form action="/Home/ParamTest?id=66" method="post">
+        Enter a number: <input name="id" /> @*looks for "OBJECT" with name of id*@
+        <button type="submit">Submit</button>
+    </form>
+
 
 </div>

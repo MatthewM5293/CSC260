@@ -56,6 +56,15 @@ namespace Movies.Controllers
             ViewBag.count = intCount++;
             ViewData["Count"] = intCount;
             return View();
+        } 
+        
+        public IActionResult ParamTest(int? id)
+        {
+            return Content($"id = {id?.ToString() ?? "NULL"}");
+            // ?? = NULL coalescing operator If left is null, do the right thing
+            // id? = NULL check if id is null, DO NOT do ToString() on right
+            // if multiple perameters are sent int, the priority is: 
+                //1. Form, 2. Route, 3. Query String
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
