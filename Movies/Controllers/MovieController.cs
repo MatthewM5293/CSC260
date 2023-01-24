@@ -17,6 +17,31 @@ namespace Movies.Controllers
         {
             return View();
         }
+        public IActionResult Edit(int? id)
+        {
+            //load current Model
+            if (id == null) return NotFound();
+               
+            Movie foundMovie = Movielist.Where(m => m.Id == id).FirstOrDefault();
+            
+            if (foundMovie == null) return NotFound();
+
+            return View(foundMovie);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Movie m)
+        {
+            //Save Edited Movie
+            int i;
+            i = Movielist.FindIndex(x => x.Id == m.Id);
+            if (i == -1) return NotFound();
+
+            Movielist[i] = m;
+            //allows user to see what changed
+            TempData["success"] = "Movie " + m.Title + " updated";
+            return RedirectToAction("MultMovies", "Movie");
+        }
         
         public IActionResult MultMovies()
         {

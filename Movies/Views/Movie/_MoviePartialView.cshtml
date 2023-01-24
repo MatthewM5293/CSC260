@@ -9,4 +9,10 @@ else
     <h3>@Model.Title</h3>
     <h3>@Model.Year</h3>
     <h3>@Model.Rating</h3>
+    
+    //Edit button
+    <a asp-controller="Movie" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mx-2">
+        <i class="bi bi-pencil-square"></i> Edit
+    </a>
+    
 }
