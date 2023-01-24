@@ -14,12 +14,25 @@ namespace Movies.Controllers
             _logger = logger;
         }
 
+        public IActionResult Colors(string colors)
+        {
+            var colorList = colors.Split("/");
+            return Content(string.Join(",", colorList));
+        }
+
         public IActionResult Index()
         {
             return View();
             //return Redirect("https://lms.neumont.edu/courses/3404485/assignments/34816051");
         }
 
+        [Route("pizza/{id?}")]
+        public IActionResult RouteTest(int? id)
+        {
+            //return Content("Stuff");
+            return Content($"id = {id?.ToString() ?? "NULL"}");
+        }
+        
         public IActionResult Privacy(string pizza)
         {
             ViewBag.mypizza = pizza;
@@ -51,6 +64,7 @@ namespace Movies.Controllers
             return View();
         }
 
+        [Route("Magic")]
         public IActionResult Counter()
         {
             ViewBag.count = intCount++;
