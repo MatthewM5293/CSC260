@@ -32,15 +32,27 @@ namespace Movies.Controllers
         [HttpPost]
         public IActionResult Edit(Movie m)
         {
+
             //Save Edited Movie
             int i;
             i = Movielist.FindIndex(x => x.Id == m.Id);
             if (i == -1) return NotFound();
 
-            Movielist[i] = m;
-            //allows user to see what changed
-            TempData["success"] = "Movie " + m.Title + " updated";
-            return RedirectToAction("MultMovies", "Movie");
+            if (m.Title != null)
+            {
+
+                Movielist[i] = m;
+                //allows user to see what changed
+                TempData["success"] = "Movie " + m.Title + " updated";
+                return RedirectToAction("MultMovies", "Movie");
+            }
+            else 
+            {
+                Movielist.RemoveAt(i);
+
+                TempData["success"] = "Movie Removed";
+                return RedirectToAction("MultMovies", "Movie");
+            }
         }
         
         public IActionResult MultMovies()
