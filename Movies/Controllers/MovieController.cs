@@ -32,9 +32,9 @@ namespace Movies.Controllers
         [HttpPost]
         public IActionResult Edit(Movie m)
         {
-
             //Save Edited Movie
             int i;
+            string temp = m.Title;
             i = Movielist.FindIndex(x => x.Id == m.Id);
             if (i == -1) return NotFound();
 
@@ -43,14 +43,15 @@ namespace Movies.Controllers
 
                 Movielist[i] = m;
                 //allows user to see what changed
-                TempData["success"] = "Movie " + m.Title + " updated";
+                TempData["success"] = "Movie " + temp + " updated";
                 return RedirectToAction("MultMovies", "Movie");
             }
             else 
             {
+                //my delete method
                 Movielist.RemoveAt(i);
 
-                TempData["success"] = "Movie Removed";
+                TempData["success"] = temp  + " was removed!";
                 return RedirectToAction("MultMovies", "Movie");
             }
         }
