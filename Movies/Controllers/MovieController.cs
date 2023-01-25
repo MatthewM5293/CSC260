@@ -38,7 +38,7 @@ namespace Movies.Controllers
             i = Movielist.FindIndex(x => x.Id == m.Id);
             if (i == -1) return NotFound();
 
-            if (m.Title != null)
+            if (m.Title != null && m.Year != null && m.Rating != null)
             {
 
                 Movielist[i] = m;
@@ -48,12 +48,22 @@ namespace Movies.Controllers
             }
             else 
             {
-                //my delete method
-                Movielist.RemoveAt(i);
-
-                TempData["success"] = temp  + " was removed!";
+                TempData["success"] = "movie properties cannot be null!";
                 return RedirectToAction("MultMovies", "Movie");
             }
+        } 
+        public IActionResult Delete(Movie m)
+        {
+            //Save Edited Movie
+            int i;
+            
+            i = Movielist.FindIndex(x => x.Id == m.Id);
+            if (i == -1) return NotFound();
+            
+            TempData["success"] = "Movie " + Movielist[i].Title + " deleted";
+            Movielist.RemoveAt(i);
+            
+            return RedirectToAction("MultMovies", "Movie");
         }
         
         public IActionResult MultMovies()
@@ -76,10 +86,10 @@ namespace Movies.Controllers
         [HttpPost] //saving create page
         public IActionResult Create(Movie m)
         {
-            if (m.Title != null && m.Year != null && m.Rating != null) 
+            if (ModelState.IsValid) 
             {
                 Movielist.Add(m); //adds movie to list
-                TempData["Success"] = "Movie added!"; //last through redirects
+                TempData["Success"] = m.Title + " was added!"; //last through redirects
                 return RedirectToAction("MultMovies", "Movie");
             }
             return View();
