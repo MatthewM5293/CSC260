@@ -1,13 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Movies.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace Movies.Models
 {
+    //applying validator to whole class
+    [EightysMovieRatings]
     public class Movie
     {
         private static int nextID = 0;
 
         public int? Id{ get; set; } = nextID++;
 
+        //set error message and string length
         [Required(ErrorMessage = "Movie Title is required, you dummy!")]
         [MaxLength(40)]
         public string Title { get; set; }

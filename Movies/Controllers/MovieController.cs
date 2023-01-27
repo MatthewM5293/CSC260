@@ -86,6 +86,12 @@ namespace Movies.Controllers
         [HttpPost] //saving create page
         public IActionResult Create(Movie m)
         {
+            //custom validation
+            if (m.Title.Contains("The Room"))
+            {
+                ModelState.AddModelError("CustomError", "That Movie sucks, you cannot add it to the database");
+            }
+
             if (ModelState.IsValid) 
             {
                 Movielist.Add(m); //adds movie to list
