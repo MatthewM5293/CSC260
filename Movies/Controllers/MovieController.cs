@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Movies.Data;
+using Movies.Interfaces;
 using Movies.Models;
 
 namespace Movies.Controllers
@@ -6,12 +8,14 @@ namespace Movies.Controllers
     public class MovieController : Controller
     {
         //hardcoded movie list
-        private static List<Movie> Movielist = new List<Movie>
-        {
-            new Movie("Star Wars: A New Hope", 1977, 4f),
-            new Movie("Star Wars: The Empire Strikes Back", 1980, 4f),
-            new Movie("Megamind", 2010, 5f),
-        };
+        //private static List<Movie> Movielist = new List<Movie>
+        //{
+        //    new Movie("Star Wars: A New Hope", 1977, 4f),
+        //    new Movie("Star Wars: The Empire Strikes Back", 1980, 4f),
+        //    new Movie("Megamind", 2010, 5f),
+        //};
+
+        IDataAccessLayer dal = new MovieListDAL();
 
         public IActionResult Index()
         {
@@ -54,21 +58,36 @@ namespace Movies.Controllers
         } 
         public IActionResult Delete(Movie m)
         {
-            //Save Edited Movie
-            int i;
-            
-            i = Movielist.FindIndex(x => x.Id == m.Id);
-            if (i == -1) return NotFound();
-            
-            TempData["success"] = "Movie " + Movielist[i].Title + " deleted";
-            Movielist.RemoveAt(i);
-            
-            return RedirectToAction("MultMovies", "Movie");
+            //    int i;
+
+            //    i = Movielist.FindIndex(x => x.Id == m.Id);
+            //    if (i == -1) return NotFound();
+
+            //    TempData["success"] = "Movie " + Movielist[i].Title + " deleted";
+            //    Movielist.RemoveAt(i);
+
+            if (dal.GetMovie(m.Id) == null) 
+            {
+                //validator
+                ModelState.AddModelError("Title", "Cannot find movie to delete");
+            }
+            if (ModelState.IsValid)
+            {
+                //temp delete
+                dal.RemoveMovie(m.Id);
+                TempData["success"] = "Movie deleted";
+
+                return RedirectToAction("MultMovies", "Movie");
+            }
+            else 
+            {
+                return View();
+            }
         }
         
         public IActionResult MultMovies()
         {
-            return View(Movielist);
+            return View(dal.GetMovies());
         }
         
         public IActionResult DisplayMovie()
@@ -94,7 +113,7 @@ namespace Movies.Controllers
 
             if (ModelState.IsValid) 
             {
-                Movielist.Add(m); //adds movie to list
+                dal.AddMovie(m); //dal method
                 TempData["Success"] = m.Title + " was added!"; //last through redirects
                 return RedirectToAction("MultMovies", "Movie");
             }
