@@ -21,52 +21,32 @@ namespace Movies.Controllers
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
-            //load current Model
-            if (id == null) return NotFound();
-               
-            Movie foundMovie = Movielist.Where(m => m.Id == id).FirstOrDefault();
-            
+            if (id == null)
+                return NotFound();
+
+            Movie foundMovie = dal.GetMovie(id);
+
             if (foundMovie == null) return NotFound();
 
-            return View(foundMovie);
+            return View();
         }
 
         [HttpPost]
         public IActionResult Edit(Movie m)
         {
-            //Save Edited Movie
-            int i;
-            string temp = m.Title;
-            i = Movielist.FindIndex(x => x.Id == m.Id);
-            if (i == -1) return NotFound();
+            dal.EditMovie(m);
+            TempData["success"] = "Movie" + m.Title + " edited";
 
-            if (m.Title != null && m.Year != null && m.Rating != null)
-            {
 
-                Movielist[i] = m;
-                //allows user to see what changed
-                TempData["success"] = "Movie " + temp + " updated";
-                return RedirectToAction("MultMovies", "Movie");
-            }
-            else 
-            {
-                TempData["success"] = "movie properties cannot be null!";
-                return RedirectToAction("MultMovies", "Movie");
-            }
+            return RedirectToAction("MultMovies", "Movie");
         } 
-        public IActionResult Delete(Movie m)
+
+        public IActionResult Delete(int? id)
         {
-            //    int i;
-
-            //    i = Movielist.FindIndex(x => x.Id == m.Id);
-            //    if (i == -1) return NotFound();
-
-            //    TempData["success"] = "Movie " + Movielist[i].Title + " deleted";
-            //    Movielist.RemoveAt(i);
-
-            if (dal.GetMovie(m.Id) == null) 
+            if (dal.GetMovie(id) == null) 
             {
                 //validator
                 ModelState.AddModelError("Title", "Cannot find movie to delete");
@@ -74,15 +54,14 @@ namespace Movies.Controllers
             if (ModelState.IsValid)
             {
                 //temp delete
-                dal.RemoveMovie(m.Id);
+                dal.RemoveMovie(id);
                 TempData["success"] = "Movie deleted";
-
-                return RedirectToAction("MultMovies", "Movie");
             }
             else 
             {
                 return View();
             }
+            return RedirectToAction("MultMovies", "Movie");
         }
         
         public IActionResult MultMovies()

@@ -20,13 +20,20 @@ namespace Movies.Data
 
         public void EditMovie(Movie m)
         {
-            throw new NotImplementedException();
+            int i;
+            i = GetMovie(m);
+            Movielist[i] = m;
         }
 
         public Movie GetMovie(int? id)
         {
             //returns a specific movie
             return Movielist.Where(m => m.Id == id).FirstOrDefault();
+        }
+
+        public int GetMovie(Movie movie)
+        {            
+            return Movielist.FindIndex(x=> x.Id == movie.Id);
         }
 
         public IEnumerable<Movie> GetMovies()

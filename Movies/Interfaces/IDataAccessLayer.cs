@@ -13,5 +13,7 @@ namespace Movies.Interfaces
         void EditMovie(Movie m);
 
         Movie GetMovie(int? id);
+
+        int GetMovie(Movie movie);
     }
 }
