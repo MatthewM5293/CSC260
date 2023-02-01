@@ -92,11 +92,22 @@ namespace Movies.Controllers
 
             if (ModelState.IsValid) 
             {
-                dal.AddMovie(m); //dal method
+                dal.AddMovie(m); //dal method that adds movie
                 TempData["Success"] = m.Title + " was added!"; //last through redirects
                 return RedirectToAction("MultMovies", "Movie");
             }
             return View();
+        }
+
+        //search
+        public IActionResult Search(string key) 
+        {
+            if (String.IsNullOrEmpty(key)) 
+            {
+                return View("MultMovies", dal.GetMovies());
+            }
+            //returns searched
+            return View("MultMovies", dal.GetMovies().Where(c => c.Title.ToLower().Contains(key.ToLower())));
         }
     }
 }
