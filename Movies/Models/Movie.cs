@@ -7,9 +7,8 @@ namespace Movies.Models
     [EightysMovieRatings]
     public class Movie
     {
-        private static int nextID = 0;
-
-        public int? Id{ get; set; } = nextID++;
+        [Key]
+        public int Id{ get; set; }
 
         //set error message and string length
         [Required(ErrorMessage = "Movie Title is required, you dummy!")]
@@ -29,9 +28,10 @@ namespace Movies.Models
         public string? Image { get; set; }
         public string? Genre { get; set; }
 
+        //needed
         public Movie() { }
 
-        public Movie(int? id, string title, int? year, float? rating, DateTime? releaseDate, string image, string genre)
+        public Movie(int id, string title, int? year, float? rating, DateTime? releaseDate, string image, string genre)
         {
             Id = id;
             Title = title;
