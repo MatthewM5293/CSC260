@@ -1,10 +1,16 @@
 ﻿@model IEnumerable<Movie>
 <h3>@TempData["Success"]</h3>
 
-@*//search*@
+@*search stuff*@
 <form class="d-flex" method="post" asp-controller="Movie" asp-action="Search">
     <input name="key" class="form-control me-sm-2" type="search" placeholder="Search" />
     <button class="btn btn-secondary my-sm-2 my-sm-0" type="submit">Search</button>
+</form>
+@*filtering stuff*@
+<form asp-controller="Movie" asp-action="Filter" method="post">
+    <input name="genre" placeholder="Genre" />
+    <input name="mparating" placeholder="mpaRating" />
+    <button type="submit" class="btn btn-success">Filter</button>
 </form>
 
 

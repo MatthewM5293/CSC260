@@ -9,15 +9,26 @@
         <div class="mb-3">
 @*            asp binds it to the title in the model*@
             <label asp-for="Title"></label>
-            <input asp-for="Title" class="form-control" placeholder="Title" />
+            <input asp-for="Title" class="form-control" placeholder="Title"/>
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Rating"></label>
             <input asp-for="Rating" class="form-control" placeholder="Rating"/>
+            <span asp-validation-for="Rating" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Year"></label>
             <input asp-for="Year" class="form-control" placeholder="Year"/>
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="MPARATING"></label>
+            <input asp-for="MPARATING" class="form-control" placeholder="MPA Rating"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Genre"></label>
+            <input asp-for="Genre" class="form-control" placeholder="Genre"/>
         </div>
         <button type="submit" class="btn btn-primary">
             <i class="bi bi-save"></i> Update

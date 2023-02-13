@@ -15,7 +15,11 @@ namespace Movies.Controllers
         //    new Movie("Megamind", 2010, 5f),
         //};
 
-        IDataAccessLayer dal = new MovieListDAL();
+        IDataAccessLayer dal;
+        public MovieController(IDataAccessLayer indal)
+        {
+            dal = indal;
+        }
 
         public IActionResult Index()
         {
@@ -109,5 +113,13 @@ namespace Movies.Controllers
             //returns searched
             return View("MultMovies", dal.GetMovies().Where(c => c.Title.ToLower().Contains(key.ToLower())));
         }
+
+        //Filter
+        [HttpPost]
+        public IActionResult Filter(string genre, string mparating) 
+        {
+            return View("MultMovies", dal.FilterMovies(genre, mparating));
+        }
+
     }
 }

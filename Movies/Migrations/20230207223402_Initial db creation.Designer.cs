@@ -12,7 +12,7 @@ using Movies.Data;
 namespace Movies.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230202221143_Initial db creation")]
+    [Migration("20230207223402_Initial db creation")]
     partial class Initialdbcreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,8 +47,8 @@ namespace Movies.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("Year")
                         .IsRequired()

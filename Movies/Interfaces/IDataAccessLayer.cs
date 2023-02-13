@@ -14,6 +14,7 @@ namespace Movies.Interfaces
 
         Movie GetMovie(int? id);
 
-        int GetMovie(Movie movie);
+        //int GetMovie(Movie movie);
+        IEnumerable<Movie> FilterMovies(string genre, string mpaRating); //list of movies
     }
 }

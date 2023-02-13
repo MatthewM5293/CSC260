@@ -12,7 +12,7 @@ namespace Movies.Models
 
         //set error message and string length
         [Required(ErrorMessage = "Movie Title is required, you dummy!")]
-        [MaxLength(40)]
+        [MaxLength(100)]
         public string Title { get; set; }
 
         [Required]
@@ -20,13 +20,14 @@ namespace Movies.Models
         public int? Year { get; set; }
 
         [Required]
-        [Range(0.5f, 5f)]
-        public float? Rating { get; set; } = 0f;
+        [Range(1, 5)]
+        public float? Rating { get; set; }
 
         public DateTime? ReleaseDate { get; set; }
 
         public string? Image { get; set; }
         public string? Genre { get; set; }
+        public string? MPARATING { get; set; } //g, pg, pg-13, R
 
         //needed
         public Movie() { }

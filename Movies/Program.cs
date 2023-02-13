@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Movies.Data;
+using Movies.Interfaces;
 using Movies.Models;
 
 namespace Movies
@@ -13,6 +14,11 @@ namespace Movies
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddTransient<IDataAccessLayer, MovieListDAL>();
+            //dependency injection
+            //AddTransient = creates new object
+            //AddScoped = instances are created once per request
+            //Singleton = same object instance
 
             var app = builder.Build();
 
