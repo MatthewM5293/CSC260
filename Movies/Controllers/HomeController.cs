@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Movies.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Movies.Controllers
 {
@@ -32,11 +34,16 @@ namespace Movies.Controllers
             //return Content("Stuff");
             return Content($"id = {id?.ToString() ?? "NULL"}");
         }
-        
-        public IActionResult Privacy(string pizza)
+
+        [Authorize] //only access if logged in
+        public IActionResult Privacy()
         {
-            ViewBag.mypizza = pizza;
-            return View();
+            string x;
+            x = User.FindFirstValue(ClaimTypes.Name); //checks user name
+            x = User.FindFirstValue(ClaimTypes.Email); //checks email
+            x = User.FindFirstValue(ClaimTypes.NameIdentifier); //checks ID 
+            return Content(x);
+            //return View();
         }
 
         public IActionResult About()

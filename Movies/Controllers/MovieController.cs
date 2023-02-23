@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Movies.Data;
 using Movies.Interfaces;
 using Movies.Models;
+using System.Security.Claims;
 
 namespace Movies.Controllers
 {
@@ -25,6 +27,8 @@ namespace Movies.Controllers
         {
             return View();
         }
+
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -38,6 +42,7 @@ namespace Movies.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Edit(Movie m)
         {
@@ -79,12 +84,14 @@ namespace Movies.Controllers
             return View(m);
         }
 
+        [Authorize]
         [HttpGet] //loading create page
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost] //saving create page
         public IActionResult Create(Movie m)
         {
@@ -96,6 +103,8 @@ namespace Movies.Controllers
 
             if (ModelState.IsValid) 
             {
+                m.UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                 dal.AddMovie(m); //dal method that adds movie
                 TempData["Success"] = m.Title + " was added!"; //last through redirects
                 return RedirectToAction("MultMovies", "Movie");
@@ -120,6 +129,8 @@ namespace Movies.Controllers
         {
             return View("MultMovies", dal.FilterMovies(genre, mparating));
         }
+
+        
 
     }
 }

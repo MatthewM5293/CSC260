@@ -29,6 +29,8 @@ namespace Movies.Models
         public string? Genre { get; set; }
         public string? MPARATING { get; set; } //g, pg, pg-13, R
 
+        public string? UserID { get; set; }
+
         //needed
         public Movie() { }
 

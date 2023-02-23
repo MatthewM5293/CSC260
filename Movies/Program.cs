@@ -14,16 +14,23 @@ namespace Movies
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<AppDbContext>
+                (options =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             //old
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<AppDbContext>();
-            
+
             //new
-            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>
+                (options => options.SignIn.RequireConfirmedAccount = false)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<AppDbContext>();
+            
             builder.Services.AddRazorPages();
 
+            //movielis DAL
             builder.Services.AddTransient<IDataAccessLayer, MovieListDAL>();
             //dependency injection
             //AddTransient = creates new object
